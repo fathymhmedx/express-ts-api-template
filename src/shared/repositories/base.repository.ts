@@ -1,5 +1,5 @@
 export class BaseRepository<T> {
-  private model: any;
+  protected model: any;
 
   constructor(model: any) {
     this.model = model;
