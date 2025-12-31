@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": [
+      "ES2022"
+    ],
+    "module": "NodeNext", // ← crucial
+    "moduleResolution": "NodeNext", // ← crucial
+    "rootDir": "./",
+    "outDir": "./dist",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true, // ← لتفعيل decorators
+    "emitDecoratorMetadata": true, // ← لتوليد metadata مطلوب لـ tsyringe
+    "useDefineForClassFields": false // ← crucial: يحل مشكلة TypeInfo not known في tsyringe مع TS5
+  },
+  "include": [
+    "src/**/*",
+    "server.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}

@@ -1,0 +1,44 @@
+import dotenv from "dotenv";
+dotenv.config({ debug: process.env.NODE_ENV === "development" });
+import type { Server } from "http";
+import app from "./src/app.js";
+import { connectDB } from "./src/shared/config/database.js";
+
+const PORT = process.env.PORT || 3000;
+let server: Server;
+
+// UNCAUGHT EXCEPTION
+process.on("uncaughtException", (err: Error) => {
+  console.error("UNCAUGHT EXCEPTION!, Shutting down...");
+  console.error(err.name, err.message);
+  console.error(err.stack);
+  process.exit(1);
+});
+
+// START SERVER
+const startServer = async () => {
+  try {
+    await connectDB();
+
+    server = app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+  } catch (error) {
+    console.error("DB connection failed:", error);
+    process.exit(1);
+  }
+};
+
+startServer();
+
+// UNHANDLED REJECTION
+process.on("unhandledRejection", (err: Error) => {
+  console.error("UNHANDLED REJECTION!, Shutting down...");
+  console.error(err.name, err.message);
+
+  if (server) {
+    server.close(() => process.exit(1));
+  } else {
+    process.exit(1);
+  }
+});
