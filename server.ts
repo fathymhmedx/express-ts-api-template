@@ -1,8 +1,10 @@
 import dotenv from "dotenv";
 dotenv.config({ debug: process.env.NODE_ENV === "development" });
+
 import type { Server } from "http";
 import app from "./src/app.js";
 import { connectDB } from "./src/shared/config/database.js";
+import { initI18n } from "./src/shared/i18n/index.js";
 
 const PORT = process.env.PORT || 3000;
 let server: Server;
@@ -18,8 +20,13 @@ process.on("uncaughtException", (err: Error) => {
 // START SERVER
 const startServer = async () => {
   try {
+    //1.i18n fisrt
+    await initI18n();
+
+    //2. DB
     await connectDB();
 
+    //3. Server
     server = app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
     });
