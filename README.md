@@ -23,7 +23,7 @@ src/
 │   └── validate.middleware.ts
 ├── modules/                # Feature modules
 │   └── users/              # Users module
-│       ├── dto/            # Data Transfer Objects
+│       ├── dtos/            # Data Transfer Objects
 │       │   ├── create-user.dto.ts
 │       │   ├── update-user.dto.ts
 │       │   └── index.ts
