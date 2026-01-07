@@ -80,7 +80,7 @@ src/
 ## 📝 Notes
 
 - Use `users.container.ts` to get the initialized UsersController
-- All DTOs are under each module in `dto/` folder
+- All DTOs are under each module in `dtos/` folder
 - Shared constants like `USER_ROLES` are in `shared/constants/`
 
 ---
@@ -93,7 +93,7 @@ src/
    ```
 2. Start development server:
    ```bash
-   npm run dev
+   npm run start:dev
    ```
 3. API base URL: `http://localhost:PORT/api/v1`
 
