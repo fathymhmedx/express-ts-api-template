@@ -1,32 +1,47 @@
 import { Schema, model, InferSchemaType } from "mongoose";
-
+import { USER_ROLES } from "../../shared/constants/user-roles.js";
 const userSchema = new Schema(
   {
     name: {
       type: String,
-      required: true,
       trim: true,
-      minlength: 2,
+      required: [true, "User name is required"],
+    },
+    slug: {
+      type: String,
+      lowercase: true,
     },
     email: {
       type: String,
-      required: true,
-      unique: true,
       lowercase: true,
-      index: true,
+      trim: true,
+      required: [true, "Email is required"],
+      match: [/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Please provide a valid email"],
     },
     password: {
       type: String,
-      required: true,
-      minlength: 8,
+      required: [true, "Password is required"],
+      minlength: [8, "Password must be at least 8 characters long"],
       select: false,
     },
+    passwordChangedAt: {
+      type: Date,
+      select: false,
+    },
+    passwordResetCode: {
+      type: String,
+      select: false,
+    },
+    passwordResetExpires: Date,
+    passwordResetVerified: Boolean,
+    phone: String,
+    profileImage: String,
     role: {
       type: String,
-      enum: ["user", "admin"],
+      enum: USER_ROLES,
       default: "user",
     },
-    isActive: {
+    active: {
       type: Boolean,
       default: true,
     },
@@ -35,6 +50,8 @@ const userSchema = new Schema(
     timestamps: true,
   }
 );
+
+userSchema.index({ email: 1 }, { unique: true });
 
 // Type inferred automatically
 export type User = InferSchemaType<typeof userSchema>;

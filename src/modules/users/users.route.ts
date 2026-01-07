@@ -1,13 +1,7 @@
 import { Router } from "express";
-import { UsersController } from "./users.controller.js";
-import { UsersRepository } from "./users.repository.js";
-import { UsersService } from "./users.service.js";
+import usersController from "../../containers/users.container.js";
 
 const router = Router();
-
-const usersRepository = new UsersRepository();
-const usersService = new UsersService(usersRepository);
-const usersController = new UsersController(usersService);
 
 router
     .route("/")

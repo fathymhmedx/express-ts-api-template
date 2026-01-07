@@ -1,9 +1,8 @@
 import { Request, Response } from "express";
-import asyncHandler from "express-async-handler";
 import { UsersService } from "./users.service.js";
-
+import { asyncHandler } from "../../shared/utils/asyncHandler.js";
 export class UsersController {
-  constructor(private userService: UsersService) { }
+  constructor(private userService: UsersService) {}
 
   // GET api/v1/users
   getAllUsers = asyncHandler(async (req: Request, res: Response) => {
