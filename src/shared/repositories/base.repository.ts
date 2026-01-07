@@ -1,27 +1,36 @@
+import { Model, HydratedDocument } from "mongoose";
+
+// Wrapper utility: fix type issues with Mongoose model methods
+function createWrapper<T>(
+  model: Model<T>,
+  data: Partial<T>
+): Promise<HydratedDocument<T>> {
+  return model.create(data as any) as Promise<HydratedDocument<T>>;
+}
+
 export class BaseRepository<T> {
-  protected model: any;
+  constructor(protected model: Model<T>) {}
 
-  constructor(model: any) {
-    this.model = model;
+  async create(data: Partial<T>): Promise<HydratedDocument<T>> {
+    return createWrapper(this.model, data); // Using wrapper to fix type issues
   }
 
-  async create(data: Partial<T>): Promise<T> {
-    return this.model.create(data);
-  }
-
-  async findAll(): Promise<T[]> {
+  async findAll(): Promise<HydratedDocument<T>[]> {
     return this.model.find();
   }
 
-  async findOne(id: string): Promise<T | null> {
+  async findOne(id: string): Promise<HydratedDocument<T> | null> {
     return this.model.findById(id);
   }
 
-  async update(id: string, data: Partial<T>): Promise<T | null> {
+  async update(
+    id: string,
+    data: Partial<T>
+  ): Promise<HydratedDocument<T> | null> {
     return this.model.findByIdAndUpdate(id, data, { new: true });
   }
 
-  async remove(id: string): Promise<T | null> {
+  async remove(id: string): Promise<HydratedDocument<T> | null> {
     return this.model.findByIdAndDelete(id);
   }
 }
