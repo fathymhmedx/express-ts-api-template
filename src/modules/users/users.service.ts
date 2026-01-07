@@ -1,6 +1,6 @@
 import { UsersRepository } from "./users.repository.js";
 import { User } from "./users.model.js";
-import { CreateUserDto, UpdateUserDto } from "./dto/index.js";
+import { CreateUserDto, UpdateUserDto } from "./dtos/index.js";
 import { ApiError } from "../../shared/errors/api-error.js";
 import { ERROR_CODES } from "../../shared/errors/error-codes.js";
 export class UsersService {
