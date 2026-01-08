@@ -1,4 +1,4 @@
-import { ERROR_CODES } from "./error-codes.js";
+import { ERROR_CODES, ErrorCodeValue } from "./error-codes.js";
  /*
  Notes:
     Record is a Utility Type in TypeScript,
@@ -13,21 +13,17 @@ import { ERROR_CODES } from "./error-codes.js";
 export class ApiError extends Error {
   public statusCode: number;
   public status: "fail" | "error";
-  public isOperational: boolean;
+  public isOperational = true;
   public code: keyof typeof ERROR_CODES;
-  public meta?: Record<string, any>;
+  public meta?: Record<string, unknown>;
 
-  constructor(
-    statusCode: number,
-    code: keyof typeof ERROR_CODES,
-    meta?: Record<string, any>
-  ) {
-    super(code);
+  constructor(error: ErrorCodeValue, meta?: Record<string, unknown>) {
+    super(error.code);
 
-    this.statusCode = statusCode;
-    this.status = `${statusCode}`.startsWith("4") ? "fail" : "error";
-    this.isOperational = true;
-    this.code = code;
+    this.code = error.code;
+    this.statusCode = error.statusCode;
+    this.status =
+      error.statusCode >= 400 && error.statusCode < 500 ? "fail" : "error";
     this.meta = meta;
 
     Error.captureStackTrace(this, this.constructor);

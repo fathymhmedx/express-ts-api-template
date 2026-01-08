@@ -10,7 +10,7 @@ export const handleZodError = (err: unknown): ApiError | null => {
       meta: issue,
     }));
 
-    return new ApiError(400, ERROR_CODES.VALIDATION_ERROR, {
+    return new ApiError(ERROR_CODES.VALIDATION_ERROR, {
       fields,
     });
   }

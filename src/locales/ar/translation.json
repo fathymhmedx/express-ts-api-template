@@ -7,30 +7,21 @@
   "INTERNAL_ERROR": "حدث خطأ ما. يرجى المحاولة مرة أخرى لاحقاً",
   "USER_NOT_FOUND": "المستخدم غير موجود",
 
+  "AUTH.INVALID_CREDENTIALS": "البريد الإلكتروني أو كلمة المرور غير صحيحة",
+  "AUTH.EMAIL_REQUIRED": "البريد الإلكتروني مطلوب",
+  "AUTH.PASSWORD_REQUIRED": "كلمة المرور مطلوبة",
+  "AUTH.PASSWORD_TOO_SHORT": "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل",
+  "AUTH.EMAIL_INVALID": "يرجى تقديم عنوان بريد إلكتروني صالح",
+  "AUTH.LOGIN_SUCCESS": "تم تسجيل الدخول بنجاح",
+  "AUTH.REGISTER_SUCCESS": "تم التسجيل بنجاح",
+  "AUTH.LOGOUT_SUCCESS": "تم تسجيل الخروج بنجاح",
 
+  "USER.CREATED": "تم إنشاء المستخدم بنجاح",
+  "USER.UPDATED": "تم تحديث المستخدم بنجاح",
+  "USER.DELETED": "تم حذف المستخدم بنجاح",
 
-  "AUTH": {
-    "INVALID_CREDENTIALS": "البريد الإلكتروني أو كلمة المرور غير صحيحة",
-    "EMAIL_REQUIRED":"البريد الإلكتروني مطلوب",
-    "PASSWORD_REQUIRED": "كلمة المرور مطلوبة",
-    "PASSWORD_TOO_SHORT": "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل",
-    "EMAIL_INVALID": "يرجى تقديم عنوان بريد إلكتروني صالح",
-    "LOGIN_SUCCESS": "تم تسجيل الدخول بنجاح",
-    "REGISTER_SUCCESS": "تم التسجيل بنجاح",
-    "LOGOUT_SUCCESS": "تم تسجيل الخروج بنجاح"
-  },
-
-  "USER": {
-    "NOT_FOUND": "المستخدم غير موجود",
-    "CREATED": "تم إنشاء المستخدم بنجاح",
-    "UPDATED": "تم تحديث المستخدم بنجاح",
-    "DELETED": "تم حذف المستخدم بنجاح"
-  },
-
-  "VALIDATION": {
-    "REQUIRED": "{{field}} مطلوب",
-    "MIN_LENGTH": "{{field}} يجب أن يكون على الأقل {{min}} حروف",
-    "INVALID_EMAIL": "البريد الإلكتروني غير صالح",
-    "INVALID_PHONE": "رقم الهاتف يجب أن يبدأ بـ +20 ويتكون من 10 أرقام"
-  }
+  "VALIDATION.REQUIRED": "{{field}} مطلوب",
+  "VALIDATION.MIN_LENGTH": "{{field}} يجب أن يكون على الأقل {{min}} حروف",
+  "VALIDATION.INVALID_EMAIL": "البريد الإلكتروني غير صالح",
+  "VALIDATION.INVALID_PHONE": "رقم الهاتف يجب أن يبدأ بـ +20 ويتكون من 10 أرقام"
 }

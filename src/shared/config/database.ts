@@ -1,14 +1,10 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
+import { env } from "../config/env.js";
+
 export const connectDB = async (): Promise<void> => {
   try {
-    const db = process.env.DB_URI?.replace(
-      "<db_password>",
-      process.env.DB_PASS as string
-    );
-    if (!db) {
-      throw new Error("Database URI is not defined");
-    }
-    await mongoose.connect(db);
+    const dbUri = env.DB_URI.replace("<db_password>", env.DB_PASS);
+    await mongoose.connect(dbUri);
     console.log("Database connected successfully");
   } catch (error) {
     console.error("Database connection error:", error);

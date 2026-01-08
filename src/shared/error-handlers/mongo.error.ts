@@ -9,7 +9,7 @@ export const handleMongoError = (err: any): ApiError | null => {
     const field = Object.keys(keyValue)[0] || "field";
     const value = keyValue[field];
 
-    return new ApiError(400, ERROR_CODES.DUPLICATE_FIELD, {
+    return new ApiError(ERROR_CODES.DUPLICATE_FIELD, {
       field,
       value,
     });
@@ -17,12 +17,12 @@ export const handleMongoError = (err: any): ApiError | null => {
 
   // Mongoose validation
   if (err.name === "ValidationError") {
-    return new ApiError(400, ERROR_CODES.VALIDATION_ERROR);
+    return new ApiError(ERROR_CODES.VALIDATION_ERROR);
   }
 
   // Cast error
   if (err.name === "CastError") {
-    return new ApiError(400, ERROR_CODES.VALIDATION_ERROR, {
+    return new ApiError(ERROR_CODES.VALIDATION_ERROR, {
       field: err.path,
       value: err.value,
     });

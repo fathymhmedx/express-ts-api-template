@@ -15,8 +15,7 @@ export const globalErrorHandler = (
     handleMongoError(err) ??
     handleZodError(err) ??
     handleJwtError(err) ??
-    (err instanceof ApiError ? err : undefined) ??
-    handleUnknownError();
+    (err instanceof ApiError ? err : handleUnknownError());
 
   const isDev = process.env.NODE_ENV === "development";
 
@@ -29,9 +28,7 @@ export const globalErrorHandler = (
     status: error.status,
     code: error.code,
     message,
-    ...(error.meta && { meta: error.meta }),
-    ...(isDev && {
-      stack: err instanceof Error ? err.stack : undefined,
-    }),
+    meta: error.meta ?? {},
+    stack: isDev && err instanceof Error ? err.stack : undefined,
   });
 };

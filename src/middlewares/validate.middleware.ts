@@ -36,7 +36,7 @@ export const validate =
         }));
 
         return next(
-          new ApiError(400, ERROR_CODES.VALIDATION_ERROR, {
+          new ApiError(ERROR_CODES.VALIDATION_ERROR, {
             fields,
           })
         );

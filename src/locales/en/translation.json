@@ -7,28 +7,21 @@
   "INTERNAL_ERROR": "Something went wrong. Please try again later",
   "USER_NOT_FOUND": "User not found",
 
-  "AUTH": {
-    "INVALID_CREDENTIALS": "Invalid email or password",
-    "EMAIL_REQUIRED": "Email is required",
-    "PASSWORD_REQUIRED": "Password is required",
-    "PASSWORD_TOO_SHORT": "Password must be at least 8 characters",
-    "EMAIL_INVALID": "Please provide a valid email address",
-    "LOGIN_SUCCESS": "Login successful",
-    "REGISTER_SUCCESS": "Registration successful",
-    "LOGOUT_SUCCESS": "Logout successful"
-  },
+  "AUTH.INVALID_CREDENTIALS": "Invalid email or password",
+  "AUTH.EMAIL_REQUIRED": "Email is required",
+  "AUTH.PASSWORD_REQUIRED": "Password is required",
+  "AUTH.PASSWORD_TOO_SHORT": "Password must be at least 8 characters",
+  "AUTH.EMAIL_INVALID": "Please provide a valid email address",
+  "AUTH.LOGIN_SUCCESS": "Login successful",
+  "AUTH.REGISTER_SUCCESS": "Registration successful",
+  "AUTH.LOGOUT_SUCCESS": "Logout successful",
 
-  "USER": {
-    "NOT_FOUND": "User not found",
-    "CREATED": "User created successfully",
-    "UPDATED": "User updated successfully",
-    "DELETED": "User deleted successfully"
-  },
+  "USER.CREATED": "User created successfully",
+  "USER.UPDATED": "User updated successfully",
+  "USER.DELETED": "User deleted successfully",
 
-  "VALIDATION": {
-    "REQUIRED": "{{field}} is required",
-    "MIN_LENGTH": "{{field}} must be at least {{min}} characters",
-    "INVALID_EMAIL": "Invalid email address",
-    "INVALID_PHONE": "Phone number must be +20 followed by 10 digits"
-  }
+  "VALIDATION.REQUIRED": "{{field}} is required",
+  "VALIDATION.MIN_LENGTH": "{{field}} must be at least {{min}} characters",
+  "VALIDATION.INVALID_EMAIL": "Invalid email address",
+  "VALIDATION.INVALID_PHONE": "Phone number must be +20 followed by 10 digits"
 }

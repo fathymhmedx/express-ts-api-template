@@ -7,5 +7,5 @@ export const notFoundHandler = (
   res: Response,
   next: NextFunction
 ) => {
-  next(new ApiError(404, ERROR_CODES.NOT_FOUND));
+  next(new ApiError(ERROR_CODES.NOT_FOUND));
 };

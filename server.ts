@@ -1,12 +1,13 @@
 import dotenv from "dotenv";
 dotenv.config({ debug: process.env.NODE_ENV === "development" });
 
+import { env } from "./src/shared/config/env.js";
+
 import type { Server } from "http";
 import app from "./src/app.js";
 import { connectDB } from "./src/shared/config/database.js";
 import { initI18n } from "./src/shared/i18n/index.js";
 
-const PORT = process.env.PORT || 3000;
 let server: Server;
 
 // UNCAUGHT EXCEPTION
@@ -27,8 +28,8 @@ const startServer = async () => {
     await connectDB();
 
     //3. Server
-    server = app.listen(PORT, () => {
-      console.log(`Server running on port ${PORT}`);
+    server = app.listen(env.PORT, () => {
+      console.log(`Server running on port ${env.PORT} in ${env.NODE_ENV} mode`);
     });
   } catch (error) {
     console.error("DB connection failed:", error);
