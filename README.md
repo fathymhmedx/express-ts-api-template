@@ -1,29 +1,47 @@
 # Node.js Express TypeScript API Template
 
-A clean and modular Node.js API template built with **Express** and **TypeScript**, using **Mongoose**, **i18n**, and structured with modules, containers, and shared utilities.
+A clean, scalable, and modular **Node.js REST API template** built with **Express** and **TypeScript**.  
+Designed using a **feature-based (modular) architecture**, with centralized error handling, validation, i18n, and clean separation of concerns.
 
 ---
 
-## 🗂 Folder Structure
+## 🚀 Tech Stack
+
+- **Node.js**
+- **Express.js**
+- **TypeScript**
+- **MongoDB + Mongoose**
+- **Zod** (validation)
+- **JWT** (ready for auth module)
+- **i18n** (English / Arabic)
+- **Conventional Commits**
+
+---
+
+## 🗂 Project Structure
 
 ```
 src/
-├── app.ts                  # Main Express app
+├── app.ts                  # Express app configuration
 ├── server.ts               # Server bootstrap
-├── containers/             # DI containers for modules
+│
+├── containers/             # Dependency Injection containers
 │   └── users.container.ts
-├── locales/                # i18n translation files
-│   ├── ar/                 # Arabic translations
+│
+├── locales/                # Localization files
+│   ├── ar/
 │   │   └── translation.json
-│   └── en/                 # English translations
+│   └── en/
 │       └── translation.json
+│
 ├── middlewares/            # Global middlewares
 │   ├── error.middleware.ts
 │   ├── not-found.middleware.ts
 │   └── validate.middleware.ts
-├── modules/                # Feature modules
-│   └── users/              # Users module
-│       ├── dtos/            # Data Transfer Objects
+│
+├── modules/                # Application modules (feature-based)
+│   └── users/
+│       ├── dtos/           # Data Transfer Objects
 │       │   ├── create-user.dto.ts
 │       │   ├── update-user.dto.ts
 │       │   └── index.ts
@@ -32,9 +50,11 @@ src/
 │       ├── users.repository.ts
 │       ├── users.route.ts
 │       └── users.service.ts
+│
 ├── routes/                 # Central route registration
 │   └── index.ts
-├── shared/                 # Shared utilities and configs
+│
+├── shared/                 # Shared & reusable logic
 │   ├── config/
 │   │   └── database.ts
 │   ├── constants/
@@ -53,56 +73,92 @@ src/
 │   │   └── base.repository.ts
 │   └── utils/
 │       └── asyncHandler.ts
+│
 └── types/
-    └── express.d.ts
+    └── express.d.ts        # Express type augmentation
 ```
 
 ---
 
-## ⚡ Features Implemented
+## ✅ Implemented Features
 
-- **Users Module**: Full CRUD with `UsersRepository`, `UsersService`, `UsersController`
-- **Mongoose Integration**: BaseRepository for generic operations
-- **Custom Async Handler**: `asyncHandler` utility for async controller methods
-- **Validation Middleware**: Zod-based validation for body, query, params
-- **Error Handling**: Centralized `ApiError` with handlers for Mongo, JWT, Zod, and unknown errors
-- **i18n**: Localization support for English (`en`) and Arabic (`ar`)
-- **DI Container**: Manual dependency injection per module
-
----
-
-## 🚧 Modules in Progress
-
-- **Auth Module** (login, registration, JWT, etc.) – coming soon
-
----
-
-## 📝 Notes
-
-- Use `users.container.ts` to get the initialized UsersController
-- All DTOs are under each module in `dtos/` folder
-- Shared constants like `USER_ROLES` are in `shared/constants/`
+- **Users Module**
+  - CRUD operations
+  - Repository → Service → Controller pattern
+  - Zod DTO validation
+- **Base Repository**
+  - Generic reusable Mongoose repository
+- **Centralized Error Handling**
+  - MongoDB errors
+  - Zod validation errors
+  - JWT errors
+  - Unknown errors
+- **Custom ApiError class**
+- **Async Handler**
+  - Clean async controllers without try/catch
+- **Internationalization (i18n)**
+  - English & Arabic translations
+- **Manual Dependency Injection**
+  - Clean containers per module
 
 ---
 
-## 💻 Usage
+## 🚧 Upcoming Modules
 
-1. Install dependencies:
-   ```bash
-   npm install
-   ```
-2. Start development server:
-   ```bash
-   npm run start:dev
-   ```
-3. API base URL: `http://localhost:PORT/api/v1`
+- **Auth Module**
+  - Register / Login
+  - JWT Access & Refresh Tokens
+  - Role-based authorization
 
 ---
 
-## 📄 Conventions
+## 📝 Development Notes
 
-- **Folder per module**: controller, service, repository, dto, route
-- **Conventional commits** used for git history
-- **Typescript strict mode** enabled
-- **i18n**: All user-facing messages go through translation files
+- All DTOs live inside each module under `dtos/`
+- Shared constants are placed in `shared/constants`
+- Controllers should never access models directly
+- All user-facing messages go through i18n
 
+---
+
+## ▶️ Getting Started
+
+### 1. Install dependencies
+```bash
+npm install
+```
+
+### 2. Run development server
+```bash
+npm run start:dev
+```
+
+### 3. Run in Production
+```bash
+npm run build      # Compile TypeScript to JavaScript
+npm run start:prod       # Start the compiled server
+
+```
+
+### 4. API Base URL
+```
+http://localhost:<PORT>/api/v1
+```
+
+---
+
+## 📦 Git Conventions
+
+- **Conventional Commits**
+  - `feat:` new feature
+  - `fix:` bug fix
+  - `refactor:` code refactor
+  - `chore:` tooling / config
+- Feature-based folder structure
+- Strict TypeScript enabled
+
+---
+
+## 📄 License
+
+This project is open-source and free to use as a starter template.
