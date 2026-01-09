@@ -15,13 +15,22 @@
   "AUTH.LOGIN_SUCCESS": "تم تسجيل الدخول بنجاح",
   "AUTH.REGISTER_SUCCESS": "تم التسجيل بنجاح",
   "AUTH.LOGOUT_SUCCESS": "تم تسجيل الخروج بنجاح",
+  "AUTH.PASSWORD_RESET_REQUESTED": "تم طلب إعادة تعيين كلمة المرور",
+  "AUTH.PASSWORD_RESET_SUCCESS": "تم إعادة تعيين كلمة المرور بنجاح",
+  "AUTH.ACCOUNT_LOCKED": "تم قفل الحساب بسبب محاولات تسجيل دخول فاشلة متعددة",
 
   "USER.CREATED": "تم إنشاء المستخدم بنجاح",
   "USER.UPDATED": "تم تحديث المستخدم بنجاح",
   "USER.DELETED": "تم حذف المستخدم بنجاح",
+  "USER.NOT_ACTIVE": "حساب المستخدم غير مفعل",
 
   "VALIDATION.REQUIRED": "{{field}} مطلوب",
   "VALIDATION.MIN_LENGTH": "{{field}} يجب أن يكون على الأقل {{min}} حروف",
   "VALIDATION.INVALID_EMAIL": "البريد الإلكتروني غير صالح",
-  "VALIDATION.INVALID_PHONE": "رقم الهاتف يجب أن يبدأ بـ +20 ويتكون من 10 أرقام"
+  "VALIDATION.INVALID_PHONE": "رقم الهاتف يجب أن يبدأ بـ +20 ويتكون من 10 أرقام",
+  "VALIDATION.PASSWORD_MISMATCH": "كلمة المرور وتأكيد كلمة المرور غير متطابقين",
+  "VALIDATION.PATTERN": "صيغة {{field}} غير صحيحة",
+
+  "LOGGER.INCOMING_REQUEST": "طلب وارد: {{method}} {{url}}",
+  "LOGGER.RESPONSE_SENT": "تم إرسال الاستجابة بحالة {{statusCode}}"
 }

@@ -2,13 +2,15 @@ import { Request, Response, NextFunction } from "express";
 import logger from "./logger.js";
 
 export const requestLogger = (
-  req: Request,
+  req: Request<{}, {}, {}, Record<string, any>>, // type-safe query
   res: Response,
   next: NextFunction
 ) => {
-  logger.info(
-    { method: req.method, url: req.url, query: req.query },
-    "Incoming request"
-  );
+  const msg = req.t("LOGGER.INCOMING_REQUEST", {
+    method: req.method,
+    url: req.url,
+  });
+
+  logger.info({ method: req.method, url: req.url, query: req.query }, msg);
   next();
 };
