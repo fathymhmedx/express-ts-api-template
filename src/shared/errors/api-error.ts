@@ -1,5 +1,5 @@
 import { ERROR_CODES, ErrorCodeValue } from "./error-codes.js";
- /*
+/*
  Notes:
     Record is a Utility Type in TypeScript,
       It represents an object type whose keys are of type KeyType
@@ -26,6 +26,8 @@ export class ApiError extends Error {
       error.statusCode >= 400 && error.statusCode < 500 ? "fail" : "error";
     this.meta = meta;
 
+    // Ensure instanceof works by setting prototype
+    Object.setPrototypeOf(this, new.target.prototype);
     Error.captureStackTrace(this, this.constructor);
   }
 }
