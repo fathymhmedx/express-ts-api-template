@@ -1,9 +1,9 @@
 import express from "express";
-import morgan from "morgan";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import compression from "compression";
+import { requestLogger } from "./shared/logger/index.js";
 import { i18next, handle as i18nextHandle } from "./shared/i18n/index.js";
 
 import v1Routes from "./routes/index.js";
@@ -11,9 +11,8 @@ const app = express();
 // Enhances security by setting appropriate HTTP headers.
 app.use(helmet());
 
-// Logs HTTP requests for debugging and monitoring purposes.
-app.use(morgan(process.env.NODE_ENV === "production" ? "combined" : "dev"));
-
+// Request Logger 
+app.use(requestLogger);
 // CORS (before cookies): Enables Cross-Origin Resource Sharing (CORS).
 app.use(
   cors({
