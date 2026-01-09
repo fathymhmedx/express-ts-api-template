@@ -3,20 +3,17 @@ import usersController from "../../containers/users.container.js";
 
 const router = Router();
 
-router
-    .route("/")
-    .get(usersController.getAllUsers)
-    .post(usersController.createUser);
+router.route("/email/:email").get(usersController.getUserByEmail);
 
 router
-    .route("/:id")
-    .get(usersController.getUserById)
-    .put(usersController.updateUser)
-    .delete(usersController.deleteUser);
+  .route("/")
+  .get(usersController.getAllUsers)
+  .post(usersController.createUser);
 
 router
-    .route("/email/:email")
-    .get(usersController.getUserByEmail);
+  .route("/:id")
+  .get(usersController.getUserById)
+  .put(usersController.updateUser)
+  .delete(usersController.deleteUser);
 
 export default router;
-  
