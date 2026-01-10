@@ -1,36 +1,51 @@
 {
-  "DUPLICATE_FIELD": "{{field}} موجود بالفعل",
-  "VALIDATION_ERROR": "فشل التحقق من الصحة. يرجى التحقق من المدخلات",
-  "INVALID_TOKEN": "رمز المصادقة غير صالح. يرجى تسجيل الدخول مرة أخرى",
-  "TOKEN_EXPIRED": "انتهت صلاحية جلستك. يرجى تسجيل الدخول مرة أخرى",
+  "FIELDS": {
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "name": "الاسم",
+    "phone": "رقم الهاتف",
+    "role": "الدور"
+  },
+
+  "DUPLICATE_FIELD": "هذا {{field}} موجود بالفعل",
+
+  "VALIDATION_ERROR": "فشل التحقق من البيانات",
+  "VALIDATION_REQUIRED": "{{field}} مطلوب",
+  "VALIDATION_MIN_LENGTH": "{{field}} يجب ألا يقل عن {{min}} حروف",
+  "VALIDATION_INVALID_EMAIL": "{{field}} غير صالح",
+  "VALIDATION_INVALID_PHONE": "رقم الهاتف يجب أن يبدأ بـ +20 ويتكون من 10 أرقام",
+  "VALIDATION_INVALID_ID": "معرف المستخدم غير صالح",
+  "VALIDATION_PASSWORD_MISMATCH": "كلمة المرور غير متطابقة",
+  "VALIDATION_PATTERN": "تنسيق {{field}} غير صالح",
+  "VALIDATION_BODY_EMPTY": "جسم الطلب لا يمكن أن يكون فارغًا",
+
+  "UNAUTHORIZED": "غير مصرح لك",
+  "INVALID_TOKEN": "رمز التحقق غير صالح",
+  "TOKEN_EXPIRED": "انتهت الجلسة",
+  "FORBIDDEN": "ليس لديك صلاحية",
+  "ACCOUNT_LOCKED": "تم قفل الحساب بسبب محاولات فاشلة متعددة",
+
+  "INVALID_CREDENTIALS": "البريد الإلكتروني أو كلمة المرور غير صحيحة",
+
   "NOT_FOUND": "المورد المطلوب غير موجود",
-  "INTERNAL_ERROR": "حدث خطأ ما. يرجى المحاولة مرة أخرى لاحقاً",
   "USER_NOT_FOUND": "المستخدم غير موجود",
+  "USER_NOT_ACTIVE": "حساب المستخدم غير مفعل",
 
-  "AUTH.INVALID_CREDENTIALS": "البريد الإلكتروني أو كلمة المرور غير صحيحة",
-  "AUTH.EMAIL_REQUIRED": "البريد الإلكتروني مطلوب",
-  "AUTH.PASSWORD_REQUIRED": "كلمة المرور مطلوبة",
-  "AUTH.PASSWORD_TOO_SHORT": "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل",
-  "AUTH.EMAIL_INVALID": "يرجى تقديم عنوان بريد إلكتروني صالح",
-  "AUTH.LOGIN_SUCCESS": "تم تسجيل الدخول بنجاح",
-  "AUTH.REGISTER_SUCCESS": "تم التسجيل بنجاح",
-  "AUTH.LOGOUT_SUCCESS": "تم تسجيل الخروج بنجاح",
-  "AUTH.PASSWORD_RESET_REQUESTED": "تم طلب إعادة تعيين كلمة المرور",
-  "AUTH.PASSWORD_RESET_SUCCESS": "تم إعادة تعيين كلمة المرور بنجاح",
-  "AUTH.ACCOUNT_LOCKED": "تم قفل الحساب بسبب محاولات تسجيل دخول فاشلة متعددة",
+  "INTERNAL_SERVER_ERROR": "حدث خطأ ما، حاول مرة أخرى لاحقًا",
 
-  "USER.CREATED": "تم إنشاء المستخدم بنجاح",
-  "USER.UPDATED": "تم تحديث المستخدم بنجاح",
-  "USER.DELETED": "تم حذف المستخدم بنجاح",
-  "USER.NOT_ACTIVE": "حساب المستخدم غير مفعل",
+  "SUCCESS": "تمت العملية بنجاح",
+  "USER_LISTED": "تم استرجاع المستخدمين بنجاح",
+  "USER_RETRIEVED": "تم استرجاع بيانات المستخدم بنجاح",
+  "USER_CREATED": "تم إنشاء المستخدم بنجاح",
+  "USER_UPDATED": "تم تحديث المستخدم بنجاح",
+  "USER_DELETED": "تم حذف المستخدم بنجاح",
 
-  "VALIDATION.REQUIRED": "{{field}} مطلوب",
-  "VALIDATION.MIN_LENGTH": "{{field}} يجب أن يكون على الأقل {{min}} حروف",
-  "VALIDATION.INVALID_EMAIL": "البريد الإلكتروني غير صالح",
-  "VALIDATION.INVALID_PHONE": "رقم الهاتف يجب أن يبدأ بـ +20 ويتكون من 10 أرقام",
-  "VALIDATION.PASSWORD_MISMATCH": "كلمة المرور وتأكيد كلمة المرور غير متطابقين",
-  "VALIDATION.PATTERN": "صيغة {{field}} غير صحيحة",
+  "LOGIN_SUCCESS": "تم تسجيل الدخول بنجاح",
+  "REGISTER_SUCCESS": "تم إنشاء الحساب بنجاح",
+  "LOGOUT_SUCCESS": "تم تسجيل الخروج",
+  "PASSWORD_RESET_REQUESTED": "تم طلب إعادة تعيين كلمة المرور",
+  "PASSWORD_RESET_SUCCESS": "تم تغيير كلمة المرور بنجاح",
 
-  "LOGGER.INCOMING_REQUEST": "طلب وارد: {{method}} {{url}}",
-  "LOGGER.RESPONSE_SENT": "تم إرسال الاستجابة بحالة {{statusCode}}"
+  "LOGGER_INCOMING_REQUEST": "طلب وارد: {{method}} {{url}}",
+  "LOGGER_RESPONSE_SENT": "تم إرسال الرد بحالة {{statusCode}}"
 }

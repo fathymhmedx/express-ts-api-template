@@ -1,36 +1,50 @@
 {
+  "FIELDS": {
+    "email": "Email",
+    "password": "Password",
+    "name": "Name",
+    "phone": "Phone number",
+    "role": "Role"
+  },
   "DUPLICATE_FIELD": "This {{field}} already exists",
+
   "VALIDATION_ERROR": "Validation failed. Please check your input",
+  "VALIDATION_REQUIRED": "{{field}} is required",
+  "VALIDATION_MIN_LENGTH": "{{field}} must be at least {{min}} characters",
+  "VALIDATION_INVALID_EMAIL": "{{field}} is invalid",
+  "VALIDATION_INVALID_PHONE": "Phone number must be +20 followed by 10 digits",
+  "VALIDATION_INVALID_ID": "Invalid user ID",
+  "VALIDATION_PASSWORD_MISMATCH": "Password and confirm password do not match",
+  "VALIDATION_PATTERN": "{{field}} format is invalid",
+  "VALIDATION_BODY_EMPTY": "Request body cannot be empty",
+
+  "UNAUTHORIZED": "You are not authorized",
   "INVALID_TOKEN": "Invalid authentication token. Please login again",
   "TOKEN_EXPIRED": "Your session has expired. Please login again",
+  "FORBIDDEN": "Access denied",
+  "ACCOUNT_LOCKED": "Account locked due to multiple failed login attempts",
+
+  "INVALID_CREDENTIALS": "Invalid email or password",
+
   "NOT_FOUND": "The requested resource was not found",
-  "INTERNAL_ERROR": "Something went wrong. Please try again later",
   "USER_NOT_FOUND": "User not found",
+  "USER_NOT_ACTIVE": "User account is not active",
 
-  "AUTH.INVALID_CREDENTIALS": "Invalid email or password",
-  "AUTH.EMAIL_REQUIRED": "Email is required",
-  "AUTH.PASSWORD_REQUIRED": "Password is required",
-  "AUTH.PASSWORD_TOO_SHORT": "Password must be at least 8 characters",
-  "AUTH.EMAIL_INVALID": "Please provide a valid email address",
-  "AUTH.LOGIN_SUCCESS": "Login successful",
-  "AUTH.REGISTER_SUCCESS": "Registration successful",
-  "AUTH.LOGOUT_SUCCESS": "Logout successful",
-  "AUTH.PASSWORD_RESET_REQUESTED": "Password reset requested",
-  "AUTH.PASSWORD_RESET_SUCCESS": "Password reset successfully",
-  "AUTH.ACCOUNT_LOCKED": "Account locked due to multiple failed login attempts",
+  "INTERNAL_SERVER_ERROR": "Something went wrong. Please try again later",
 
-  "USER.CREATED": "User created successfully",
-  "USER.UPDATED": "User updated successfully",
-  "USER.DELETED": "User deleted successfully",
-  "USER.NOT_ACTIVE": "User account is not active",
+  "SUCCESS": "Operation completed successfully",
+  "USER_LISTED": "Users listed successfully",
+  "USER_RETRIEVED": "User retrieved successfully",
+  "USER_CREATED": "User created successfully",
+  "USER_UPDATED": "User updated successfully",
+  "USER_DELETED": "User deleted successfully",
 
-  "VALIDATION.REQUIRED": "{{field}} is required",
-  "VALIDATION.MIN_LENGTH": "{{field}} must be at least {{min}} characters",
-  "VALIDATION.INVALID_EMAIL": "Invalid email address",
-  "VALIDATION.INVALID_PHONE": "Phone number must be +20 followed by 10 digits",
-  "VALIDATION.PASSWORD_MISMATCH": "Password and confirm password do not match",
-  "VALIDATION.PATTERN": "{{field}} format is invalid",
+  "LOGIN_SUCCESS": "Login successful",
+  "REGISTER_SUCCESS": "Registration successful",
+  "LOGOUT_SUCCESS": "Logout successful",
+  "PASSWORD_RESET_REQUESTED": "Password reset requested",
+  "PASSWORD_RESET_SUCCESS": "Password reset successfully",
 
-  "LOGGER.INCOMING_REQUEST": "Incoming request: {{method}} {{url}}",
-  "LOGGER.RESPONSE_SENT": "Response sent with status {{statusCode}}"
+  "LOGGER_INCOMING_REQUEST": "Incoming request: {{method}} {{url}}",
+  "LOGGER_RESPONSE_SENT": "Response sent with status {{statusCode}}"
 }
