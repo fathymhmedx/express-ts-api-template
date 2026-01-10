@@ -1,65 +1,117 @@
 import { Request, Response } from "express";
 import { UsersService } from "./users.service.js";
 import { asyncHandler } from "../../shared/utils/asyncHandler.js";
+import { translate } from "../../shared/utils/translate.js";
+import { USER_CODES } from "./users.codes.js";
+
+/**
+ * Users Controller
+ * Responsible only for handling HTTP requests & responses
+ */
 export class UsersController {
+  /**
+   * @param {UsersService} userService - Users service instance
+   */
   constructor(private userService: UsersService) {}
 
-  // GET api/v1/users
+  /**
+   * Get all users
+   * @route GET /api/v1/users
+   * @access public / Protected (depends on middleware)
+   * @param {Request} req
+   * @param {Response} res
+   * @returns {Promise<void>}
+   */
   getAllUsers = asyncHandler(async (req: Request, res: Response) => {
     const users = await this.userService.getAllUsers();
-    res.status(200).json({
+    res.status(USER_CODES.USER_LISTED.statusCode).json({
       status: "success",
-      message: "Users retrieved successfully",
+      message: translate(USER_CODES.USER_LISTED.code, { lng: req.language }),
       data: { users },
     });
   });
 
-  // GET api/v1/users/:id
+  /**
+   * Get user by ID
+   * @route GET /api/v1/users/:id
+   * @access public / Protected
+   * @param {Request} req
+   * @param {Response} res
+   * @returns {Promise<void>}
+   */
   getUserById = asyncHandler(async (req: Request, res: Response) => {
     const user = await this.userService.getUserById(req.params.id);
-    res.status(200).json({
+    res.status(USER_CODES.USER_RETRIEVED.statusCode).json({
       status: "success",
-      message: "User retrieved successfully",
+      message: translate(USER_CODES.USER_RETRIEVED.code, { lng: req.language }),
       data: { user },
     });
   });
 
-  // POST api/v1/users
+  /**
+   * Create new user
+   * @route POST /api/v1/users
+   * @access protected (Admin)
+   * @param {Request} req
+   * @param {Response} res
+   * @returns {Promise<void>}
+   */
   createUser = asyncHandler(async (req: Request, res: Response) => {
     const user = await this.userService.createUser(req.body);
-    res.status(201).json({
+    res.status(USER_CODES.USER_CREATED.statusCode).json({
       status: "success",
-      message: "User created successfully",
+      message: translate(USER_CODES.USER_CREATED.code, { lng: req.language }),
       data: { user },
     });
   });
 
-  // PUT api/v1/users/:id
+  /**
+   * Update user by ID
+   * @route PUT /api/v1/users/:id
+   * @access protected
+   * @param {Request} req
+   * @param {Response} res
+   * @returns {Promise<void>}
+   */
   updateUser = asyncHandler(async (req: Request, res: Response) => {
     const user = await this.userService.updateUser(req.params.id, req.body);
-    res.status(200).json({
+    res.status(USER_CODES.USER_UPDATED.statusCode).json({
       status: "success",
-      message: "User updated successfully",
+      message: translate(USER_CODES.USER_UPDATED.code, { lng: req.language }),
       data: { user },
     });
   });
 
-  // DELETE api/v1/users/:id
+  /**
+   * Delete user by ID
+   * @route DELETE /api/v1/users/:id
+   * @access protected (Admin)
+   * @param {Request} req
+   * @param {Response} res
+   * @returns {Promise<void>}
+   */
   deleteUser = asyncHandler(async (req: Request, res: Response) => {
     const user = await this.userService.deleteUser(req.params.id);
-    res.status(200).json({
+    res.status(USER_CODES.USER_DELETED.statusCode).json({
       status: "success",
-      message: "User deleted successfully",
+      message: translate(USER_CODES.USER_DELETED.code, { lng: req.language }),
       data: { user },
     });
   });
 
-  // GET api/v1/users/email/:email
+  /**
+   * Get user by email
+   * @route GET /api/v1/users/email/:email
+   * @access protected
+   * @param {Request} req
+   * @param {Response} res
+   * @returns {Promise<void>}
+   */
   getUserByEmail = asyncHandler(async (req: Request, res: Response) => {
     const user = await this.userService.getUserByEmail(req.params.email);
-    res.status(200).json({
+    res.status(USER_CODES.USER_RETRIEVED.statusCode).json({
       status: "success",
-      message: "User retrieved successfully",
+      message: translate(USER_CODES.USER_RETRIEVED.code, { lng: req.language }),
       data: { user },
     });
   });
