@@ -1,32 +1,37 @@
-import { ERROR_CODES, ErrorCodeValue } from "./error-codes.js";
-/*
- Notes:
-    Record is a Utility Type in TypeScript,
-      It represents an object type whose keys are of type KeyType
-      and whose values are of type ValueType.
-  
-    Used here for `meta` to allow flexible, dynamic error details.
-    
-    Syntax:
-      Record<KeyType, ValueType>
-  */
-export class ApiError extends Error {
-  public statusCode: number;
-  public status: "fail" | "error";
-  public isOperational = true;
-  public code: keyof typeof ERROR_CODES;
-  public meta?: Record<string, unknown>;
+// Single validation error for a specific field
+export interface ValidationField {
+  field: string; // Field name (e.g. "email", "password")
+  code: string; // Validation error code (e.g. "VALIDATION_MIN_LENGTH")
+  meta?: Record<string, unknown>; // Extra info for the field (optional)
+}
 
-  constructor(error: ErrorCodeValue, meta?: Record<string, unknown>) {
+// Metadata attached to ApiError (mainly for validation errors)
+export interface ValidationMeta {
+  fields?: ValidationField[]; // List of field-level validation errors
+  [key: string]: unknown; // Allow additional metadata if needed
+}
+
+// Generic API error class used across the application
+export class ApiError<
+  T extends { code: string; statusCode: number } = {
+    code: string;
+    statusCode: number;
+  }
+> extends Error {
+  public statusCode: number; // HTTP status code
+  public status: "fail" | "error"; // Client error or server error
+  public code: string; // Application-specific error code
+  public meta?: ValidationMeta; // Optional extra error data
+
+  constructor(error: T, meta?: ValidationMeta) {
     super(error.code);
-
     this.code = error.code;
     this.statusCode = error.statusCode;
     this.status =
       error.statusCode >= 400 && error.statusCode < 500 ? "fail" : "error";
     this.meta = meta;
 
-    // Ensure instanceof works by setting prototype
+    // Fix prototype chain when extending Error
     Object.setPrototypeOf(this, new.target.prototype);
     Error.captureStackTrace(this, this.constructor);
   }
