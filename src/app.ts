@@ -11,8 +11,6 @@ const app = express();
 // Enhances security by setting appropriate HTTP headers.
 app.use(helmet());
 
-// Request Logger 
-app.use(requestLogger);
 // CORS (before cookies): Enables Cross-Origin Resource Sharing (CORS).
 app.use(
   cors({
@@ -33,9 +31,11 @@ app.use(express.json({ limit: "50kb" }));
 // i18next instance and middleware handle are imported from the i18n module.
 app.use(i18nextHandle(i18next));
 
+// Request Logger
+app.use(requestLogger);
+
 // Parses incoming URL-encoded payloads, such as form submissions.
 app.use(express.urlencoded({ extended: true }));
-
 
 // Parses cookies from incoming requests.
 app.use(cookieParser());

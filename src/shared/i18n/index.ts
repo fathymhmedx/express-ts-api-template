@@ -19,6 +19,7 @@ export const initI18n = async () => {
       },
       detection: {
         order: ["header", "querystring", "cookie"],
+        lookupHeader: "accept-language",
         caches: false,
       },
     });

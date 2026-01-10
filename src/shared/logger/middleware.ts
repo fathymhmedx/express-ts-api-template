@@ -6,11 +6,18 @@ export const requestLogger = (
   res: Response,
   next: NextFunction
 ) => {
-  const msg = req.t("LOGGER.INCOMING_REQUEST", {
-    method: req.method,
-    url: req.url,
-  });
+  const msg = `Incoming request: ${req.method} ${req.url}`;
 
-  logger.info({ method: req.method, url: req.url, query: req.query }, msg);
+  logger.info(
+    {
+      method: req.method,
+      url: req.url,
+      query: req.query,
+      params: req.params,
+      body: req.body,
+    },
+    msg
+  );
+
   next();
 };
