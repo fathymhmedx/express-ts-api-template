@@ -1,9 +1,10 @@
 import { Request, Response, NextFunction } from "express";
-import { ApiError } from "../shared/errors/api-error.js";
+import { ApiError, ValidationField } from "../shared/errors/api-error.js";
 import { handleMongoError } from "../shared/error-handlers/mongo.error.js";
 import { handleZodError } from "../shared/error-handlers/zod.error.js";
 import { handleJwtError } from "../shared/error-handlers/jwt.error.js";
 import { handleUnknownError } from "../shared/error-handlers/unknown.error.js";
+import { translate } from "../shared/utils/translate.js";
 
 export const globalErrorHandler = (
   err: unknown,
@@ -19,16 +20,33 @@ export const globalErrorHandler = (
 
   const isDev = process.env.NODE_ENV === "development";
 
-  const message = req.t(error.code, {
-    defaultValue: error.code,
-    ...(error.meta || {}),
+  // Translate the main message
+  const message = translate(error.code, {
+    lng: req.language,
+    meta: error.meta ?? {},
   });
+
+  // Translate all fields
+  const translatedFields: ValidationField[] | undefined =
+    error.meta?.fields?.map((field) => ({
+      ...field,
+      // The code is fixed
+      code: field.code,
+      // The message is translated for the end user
+      message: translate(field.code, {
+        lng: req.language,
+        meta: { ...field.meta, field: field.field },
+      }),
+    }));
 
   res.status(error.statusCode).json({
     status: error.status,
     code: error.code,
     message,
-    meta: error.meta ?? {},
+    meta: {
+      ...error.meta,
+      fields: translatedFields,
+    },
     stack: isDev && err instanceof Error ? err.stack : undefined,
   });
 };
