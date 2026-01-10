@@ -1,18 +1,21 @@
 import { ZodError } from "zod";
-import { ApiError } from "../errors/api-error.js";
+import { ApiError, ValidationField } from "../errors/api-error.js";
 import { ERROR_CODES } from "../errors/error-codes.js";
 
 export const handleZodError = (err: unknown): ApiError | null => {
   if (err instanceof ZodError) {
-    const fields = err.issues.map((issue) => ({
+    const fields: ValidationField[] = err.issues.map((issue) => ({
       field: issue.path.join("."),
-      rule: issue.code,
-      meta: issue,
+      code: issue.code,
+      meta:
+        issue.code === "too_small"
+          ? { min: issue.minimum }
+          : issue.code === "too_big"
+          ? { max: issue.maximum }
+          : {},
     }));
 
-    return new ApiError(ERROR_CODES.VALIDATION_ERROR, {
-      fields,
-    });
+    return new ApiError(ERROR_CODES.VALIDATION_ERROR, { fields });
   }
 
   return null;
