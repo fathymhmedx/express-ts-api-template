@@ -1,38 +1,47 @@
 import { z } from "zod";
 import { USER_ROLES } from "../../../shared/constants/user-roles.js";
 
-export const updateUserSchema = z.object({
-  name: z
-    .string()
-    .min(2, {
-      message: "VALIDATION.MIN_LENGTH",
-    })
-    .optional(),
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  email: z
-    .string()
-    .email({
-      message: "VALIDATION.INVALID_EMAIL",
-    })
-    .optional(),
+export const updateUserSchema = z
+  .object({
+    name: z
+      .string()
+      .min(2, {
+        message: "VALIDATION_MIN_LENGTH",
+      })
+      .optional(),
 
-  password: z
-    .string()
-    .min(8, {
-      message: "VALIDATION.MIN_LENGTH",
-    })
-    .optional(),
+    email: z
+      .string()
+      .regex(emailRegex, {
+        message: "VALIDATION_INVALID_EMAIL",
+      })
+      .toLowerCase()
+      .trim()
+      .optional(),
 
-  role: z.enum(USER_ROLES).optional(),
+    password: z
+      .string()
+      .min(8, {
+        message: "VALIDATION_MIN_LENGTH",
+      })
+      .optional(),
 
-  phone: z
-    .string()
-    .regex(/^\+20\d{10}$/, {
-      message: "VALIDATION.INVALID_PHONE",
-    })
-    .optional(),
+    role: z.enum(USER_ROLES).optional(),
 
-  profileImage: z.string().optional(),
-});
+    phone: z
+      .string()
+      .regex(/^\+20\d{10}$/, {
+        message: "VALIDATION_INVALID_PHONE",
+      })
+      .optional(),
+
+    profileImage: z.string().optional(),
+  })
+  .strict()
+  .refine((data) => Object.keys(data).length > 0, {
+    message: "VALIDATION_BODY_EMPTY",
+  });
 
 export type UpdateUserDto = z.infer<typeof updateUserSchema>;
