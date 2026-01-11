@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { UsersService } from "./users.service.js";
-import { asyncHandler } from "../../shared/utils/asyncHandler.js";
 import { translate } from "../../shared/utils/translate.js";
 import { USER_CODES } from "./users.codes.js";
 
@@ -22,14 +21,14 @@ export class UsersController {
    * @param {Response} res
    * @returns {Promise<void>}
    */
-  getAllUsers = asyncHandler(async (req: Request, res: Response) => {
+  getAllUsers = async (req: Request, res: Response) => {
     const users = await this.userService.getAllUsers();
     res.status(USER_CODES.USER_LISTED.statusCode).json({
       status: "success",
       message: translate(USER_CODES.USER_LISTED.code, { lng: req.language }),
       data: { users },
     });
-  });
+  };
 
   /**
    * Get user by ID
@@ -39,14 +38,14 @@ export class UsersController {
    * @param {Response} res
    * @returns {Promise<void>}
    */
-  getUserById = asyncHandler(async (req: Request, res: Response) => {
+  getUserById = async (req: Request, res: Response) => {
     const user = await this.userService.getUserById(req.params.id);
     res.status(USER_CODES.USER_RETRIEVED.statusCode).json({
       status: "success",
       message: translate(USER_CODES.USER_RETRIEVED.code, { lng: req.language }),
       data: { user },
     });
-  });
+  };
 
   /**
    * Create new user
@@ -56,14 +55,14 @@ export class UsersController {
    * @param {Response} res
    * @returns {Promise<void>}
    */
-  createUser = asyncHandler(async (req: Request, res: Response) => {
+  createUser = async (req: Request, res: Response) => {
     const user = await this.userService.createUser(req.body);
     res.status(USER_CODES.USER_CREATED.statusCode).json({
       status: "success",
       message: translate(USER_CODES.USER_CREATED.code, { lng: req.language }),
       data: { user },
     });
-  });
+  };
 
   /**
    * Update user by ID
@@ -73,14 +72,14 @@ export class UsersController {
    * @param {Response} res
    * @returns {Promise<void>}
    */
-  updateUser = asyncHandler(async (req: Request, res: Response) => {
+  updateUser = async (req: Request, res: Response) => {
     const user = await this.userService.updateUser(req.params.id, req.body);
     res.status(USER_CODES.USER_UPDATED.statusCode).json({
       status: "success",
       message: translate(USER_CODES.USER_UPDATED.code, { lng: req.language }),
       data: { user },
     });
-  });
+  };
 
   /**
    * Delete user by ID
@@ -90,14 +89,14 @@ export class UsersController {
    * @param {Response} res
    * @returns {Promise<void>}
    */
-  deleteUser = asyncHandler(async (req: Request, res: Response) => {
+  deleteUser = async (req: Request, res: Response) => {
     const user = await this.userService.deleteUser(req.params.id);
     res.status(USER_CODES.USER_DELETED.statusCode).json({
       status: "success",
       message: translate(USER_CODES.USER_DELETED.code, { lng: req.language }),
       data: { user },
     });
-  });
+  };
 
   /**
    * Get user by email
@@ -107,12 +106,12 @@ export class UsersController {
    * @param {Response} res
    * @returns {Promise<void>}
    */
-  getUserByEmail = asyncHandler(async (req: Request, res: Response) => {
+  getUserByEmail = async (req: Request, res: Response) => {
     const user = await this.userService.getUserByEmail(req.params.email);
     res.status(USER_CODES.USER_RETRIEVED.statusCode).json({
       status: "success",
       message: translate(USER_CODES.USER_RETRIEVED.code, { lng: req.language }),
       data: { user },
     });
-  });
+  };
 }
