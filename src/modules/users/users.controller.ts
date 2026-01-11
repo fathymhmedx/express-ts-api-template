@@ -16,10 +16,7 @@ export class UsersController {
   /**
    * Get all users
    * @route GET /api/v1/users
-   * @access public / Protected (depends on middleware)
-   * @param {Request} req
-   * @param {Response} res
-   * @returns {Promise<void>}
+   * @access public / Protected
    */
   getAllUsers = async (req: Request, res: Response) => {
     const users = await this.userService.getAllUsers();
@@ -34,9 +31,6 @@ export class UsersController {
    * Get user by ID
    * @route GET /api/v1/users/:id
    * @access public / Protected
-   * @param {Request} req
-   * @param {Response} res
-   * @returns {Promise<void>}
    */
   getUserById = async (req: Request, res: Response) => {
     const user = await this.userService.getUserById(req.params.id);
@@ -48,12 +42,9 @@ export class UsersController {
   };
 
   /**
-   * Create new user
+   * Create user
    * @route POST /api/v1/users
    * @access protected (Admin)
-   * @param {Request} req
-   * @param {Response} res
-   * @returns {Promise<void>}
    */
   createUser = async (req: Request, res: Response) => {
     const user = await this.userService.createUser(req.body);
@@ -65,12 +56,9 @@ export class UsersController {
   };
 
   /**
-   * Update user by ID
+   * Update user
    * @route PUT /api/v1/users/:id
    * @access protected
-   * @param {Request} req
-   * @param {Response} res
-   * @returns {Promise<void>}
    */
   updateUser = async (req: Request, res: Response) => {
     const user = await this.userService.updateUser(req.params.id, req.body);
@@ -82,12 +70,9 @@ export class UsersController {
   };
 
   /**
-   * Delete user by ID
+   * Delete user
    * @route DELETE /api/v1/users/:id
    * @access protected (Admin)
-   * @param {Request} req
-   * @param {Response} res
-   * @returns {Promise<void>}
    */
   deleteUser = async (req: Request, res: Response) => {
     const user = await this.userService.deleteUser(req.params.id);
@@ -102,9 +87,6 @@ export class UsersController {
    * Get user by email
    * @route GET /api/v1/users/email/:email
    * @access protected
-   * @param {Request} req
-   * @param {Response} res
-   * @returns {Promise<void>}
    */
   getUserByEmail = async (req: Request, res: Response) => {
     const user = await this.userService.getUserByEmail(req.params.email);
