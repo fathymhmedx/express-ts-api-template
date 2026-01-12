@@ -17,11 +17,16 @@
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "useDefineForClassFields": false
+    "useDefineForClassFields": false,
+    "typeRoots": [
+      "./types",
+      "./node_modules/@types"
+    ]
   },
   "include": [
     "src/**/*",
-    "server.ts"
+    "server.ts",
+    "types"
   ],
   "exclude": [
     "node_modules",
