@@ -33,7 +33,8 @@ export class UsersController {
    * @access public / Protected
    */
   getUserById = async (req: Request, res: Response) => {
-    const user = await this.userService.getUserById(req.params.id);
+    const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
+    const user = await this.userService.getUserById(id);
     res.status(USER_CODES.USER_RETRIEVED.statusCode).json({
       status: "success",
       message: translate(USER_CODES.USER_RETRIEVED.code, { lng: req.language }),
@@ -61,7 +62,9 @@ export class UsersController {
    * @access protected
    */
   updateUser = async (req: Request, res: Response) => {
-    const user = await this.userService.updateUser(req.params.id, req.body);
+    const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
+
+    const user = await this.userService.updateUser(id, req.body);
     res.status(USER_CODES.USER_UPDATED.statusCode).json({
       status: "success",
       message: translate(USER_CODES.USER_UPDATED.code, { lng: req.language }),
@@ -75,7 +78,9 @@ export class UsersController {
    * @access protected (Admin)
    */
   deleteUser = async (req: Request, res: Response) => {
-    const user = await this.userService.deleteUser(req.params.id);
+    const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
+
+    const user = await this.userService.deleteUser(id);
     res.status(USER_CODES.USER_DELETED.statusCode).json({
       status: "success",
       message: translate(USER_CODES.USER_DELETED.code, { lng: req.language }),
@@ -89,7 +94,11 @@ export class UsersController {
    * @access protected
    */
   getUserByEmail = async (req: Request, res: Response) => {
-    const user = await this.userService.getUserByEmail(req.params.email);
+    const email = Array.isArray(req.params.email)
+      ? req.params.email[0]
+      : req.params.email;
+
+    const user = await this.userService.getUserByEmail(email);
     res.status(USER_CODES.USER_RETRIEVED.statusCode).json({
       status: "success",
       message: translate(USER_CODES.USER_RETRIEVED.code, { lng: req.language }),
