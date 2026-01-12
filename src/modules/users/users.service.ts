@@ -1,8 +1,8 @@
-import { UsersRepository } from "./users.repository.js";
-import { User } from "./users.model.js";
-import { CreateUserDto, UpdateUserDto } from "./dtos/index.js";
-import { ApiError } from "../../shared/errors/api-error.js";
-import { USER_ERRORS } from "./users.codes.js";
+import { UsersRepository } from './users.repository.js';
+import { User } from './users.model.js';
+import { CreateUserDto, UpdateUserDto } from './dtos/index.js';
+import { ApiError } from '../../shared/errors/api-error.js';
+import { USER_ERRORS } from './users.codes.js';
 export class UsersService {
   constructor(private userRepository: UsersRepository) {}
 
@@ -22,13 +22,15 @@ export class UsersService {
 
   async updateUser(userId: string, updateData: UpdateUserDto): Promise<User> {
     const updatedUser = await this.userRepository.update(userId, updateData);
-    if (!updatedUser) throw new ApiError(USER_ERRORS.USER_NOT_FOUND, { userId });
+    if (!updatedUser)
+      throw new ApiError(USER_ERRORS.USER_NOT_FOUND, { userId });
     return updatedUser;
   }
 
   async deleteUser(userId: string): Promise<User> {
     const deletedUser = await this.userRepository.remove(userId);
-    if (!deletedUser) throw new ApiError(USER_ERRORS.USER_NOT_FOUND, { userId });
+    if (!deletedUser)
+      throw new ApiError(USER_ERRORS.USER_NOT_FOUND, { userId });
     return deletedUser;
   }
 

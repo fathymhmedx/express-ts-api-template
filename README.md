@@ -7,7 +7,7 @@ This template focuses on **clean architecture, separation of concerns, and maint
 
 ---
 
-## 🚀 Tech Stack
+## Tech Stack
 
 - **Node.js**
 - **Express.js**
@@ -20,7 +20,7 @@ This template focuses on **clean architecture, separation of concerns, and maint
 
 ---
 
-## 🗂 Project Structure
+## Project Structure
 
 ```
 src/
@@ -86,14 +86,16 @@ src/
 
 ---
 
-## ✅ Implemented Features
+## Implemented Features
 
-### 🧩 Modular Architecture
+### Modular Architecture
+
 - Feature-based modules (`users`, `auth`, etc.)
 - Clear separation: **Controller → Service → Repository**
 - Controllers never access models directly
 
-### 🧪 Validation
+### Validation
+
 - Zod schemas for:
   - Request body
   - Route params (`id`, `email`, etc.)
@@ -101,7 +103,8 @@ src/
 - Generic validation middleware
 - Structured field-level validation errors
 
-### ❌ Centralized Error Handling
+### Centralized Error Handling
+
 - Unified `ApiError` abstraction
 - Automatic handling for:
   - MongoDB errors
@@ -110,28 +113,32 @@ src/
   - Unknown errors
 - Consistent and predictable error response format
 
-### 🌍 Internationalization (i18n)
+### Internationalization (i18n)
+
 - English & Arabic support
 - All user-facing messages go through i18n
 - Field-level validation messages are translated automatically
 
-### 📦 Users Module
+### Users Module
+
 - Full CRUD operations
 - Request params validation (`id`, `email`)
 - Domain-specific success & error codes
 - Clean, translated API responses
 
-### 🧠 Base Repository
+### Base Repository
+
 - Generic reusable Mongoose repository
 - Reduces duplication across modules
 
-### 🔌 Dependency Injection
+### Dependency Injection
+
 - Manual DI via containers
 - Easy to test, extend, and refactor
 
 ---
 
-## 🚧 Upcoming Modules
+## Upcoming Modules
 
 - **Auth Module**
   - Register / Login
@@ -140,7 +147,7 @@ src/
 
 ---
 
-## 📝 Development Guidelines
+## Development Guidelines
 
 - DTOs live inside each module under `dtos/`
 - Separate DTOs for:
@@ -154,32 +161,36 @@ src/
 
 ---
 
-## ▶️ Getting Started
+## Getting Started
 
 ### 1. Install dependencies
+
 ```bash
 npm install
 ```
 
 ### 2. Run development server
+
 ```bash
 npm run start:dev
 ```
 
 ### 3. Run in production
+
 ```bash
 npm run build
 npm run start:prod
 ```
 
 ### 4. API Base URL
+
 ```
 http://localhost:<PORT>/api/v1
 ```
 
 ---
 
-## 📦 Git Conventions
+## Git Conventions
 
 This project follows **Conventional Commits**:
 
@@ -190,15 +201,16 @@ This project follows **Conventional Commits**:
 
 ---
 
-## 📄 License
+## License
 
 This project is open-source and free to use as a **starter template for scalable Node.js APIs**.
 
 ---
 
-### 👑 Note
+### Note
+
 The template is production-ready and can be used as:
+
 - A starting point for a company project
 - An open-source boilerplate
 - Reference architecture for Node.js + TypeScript APIs
-

@@ -1,7 +1,7 @@
-import i18next from "i18next";
-import Backend from "i18next-fs-backend";
-import { handle, LanguageDetector } from "i18next-http-middleware";
-import path from "path";
+import i18next from 'i18next';
+import Backend from 'i18next-fs-backend';
+import { handle, LanguageDetector } from 'i18next-http-middleware';
+import path from 'path';
 
 // initI18n(): responsible for initialization and configuration of the i18next library
 export const initI18n = async () => {
@@ -9,17 +9,17 @@ export const initI18n = async () => {
     .use(Backend)
     .use(LanguageDetector)
     .init({
-      fallbackLng: "en",
-      preload: ["en", "ar"],
+      fallbackLng: 'en',
+      preload: ['en', 'ar'],
       backend: {
         loadPath: path.join(
           process.cwd(),
-          "src/locales/{{lng}}/translation.json"
+          'src/locales/{{lng}}/translation.json',
         ),
       },
       detection: {
-        order: ["header", "querystring", "cookie"],
-        lookupHeader: "accept-language",
+        order: ['header', 'querystring', 'cookie'],
+        lookupHeader: 'accept-language',
         caches: false,
       },
     });

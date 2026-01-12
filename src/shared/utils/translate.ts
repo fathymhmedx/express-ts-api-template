@@ -1,4 +1,4 @@
-import i18next from "i18next";
+import i18next from 'i18next';
 
 /**
  * Translate code to the desired language, with optional placeholders.
@@ -6,7 +6,7 @@ import i18next from "i18next";
  */
 export const translate = (
   code: string,
-  options?: { lng?: string; meta?: Record<string, unknown> }
+  options?: { lng?: string; meta?: Record<string, unknown> },
 ): string => {
   const meta = { ...options?.meta };
 

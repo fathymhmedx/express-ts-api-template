@@ -1,9 +1,9 @@
-import { Model, HydratedDocument } from "mongoose";
+import { Model, HydratedDocument } from 'mongoose';
 
 // Wrapper utility: fix type issues with Mongoose model methods
 function createWrapper<T>(
   model: Model<T>,
-  data: Partial<T>
+  data: Partial<T>,
 ): Promise<HydratedDocument<T>> {
   return model.create(data as any) as Promise<HydratedDocument<T>>;
 }
@@ -25,7 +25,7 @@ export class BaseRepository<T> {
 
   async update(
     id: string,
-    data: Partial<T>
+    data: Partial<T>,
   ): Promise<HydratedDocument<T> | null> {
     return this.model.findByIdAndUpdate(id, data, { new: true });
   }

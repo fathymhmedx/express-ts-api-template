@@ -14,7 +14,7 @@
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx}": [
-      "eslint --fix",
+      "eslint --fix --max-warnings=0",
       "prettier --write"
     ],
     "*.{json,md}": [
@@ -30,10 +30,14 @@
     "@types/express": "^5.0.5",
     "@types/helmet": "^0.0.48",
     "@types/jsonwebtoken": "^9.0.10",
-    "@types/morgan": "^1.9.10",
     "@types/node": "^24.10.1",
+    "@typescript-eslint/eslint-plugin": "^8.52.0",
+    "@typescript-eslint/parser": "^8.52.0",
     "cross-env": "^10.1.0",
     "eslint": "^9.39.2",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-define-config": "^2.1.0",
+    "eslint-plugin-only-warn": "^1.1.0",
     "husky": "^8.0.0",
     "lint-staged": "^16.2.7",
     "prettier": "^3.7.4",

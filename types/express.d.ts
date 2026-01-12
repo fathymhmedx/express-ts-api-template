@@ -1,6 +1,6 @@
-import "express-serve-static-core"; 
+import 'express-serve-static-core';
 // Module Augmentation for Express Request to include validated data
-declare module "express-serve-static-core" {
+declare module 'express-serve-static-core' {
   interface Request {
     validatedBody?: unknown;
     validatedQuery?: unknown;

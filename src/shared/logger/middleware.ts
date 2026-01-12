@@ -1,10 +1,10 @@
-import { Request, Response, NextFunction } from "express";
-import logger from "./logger.js";
+import { Request, Response, NextFunction } from 'express';
+import logger from './logger.js';
 
 export const requestLogger = (
   req: Request<{}, {}, {}, Record<string, any>>, // type-safe query
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   const msg = `Incoming request: ${req.method} ${req.url}`;
 
@@ -16,7 +16,7 @@ export const requestLogger = (
       params: req.params,
       body: req.body,
     },
-    msg
+    msg,
   );
 
   next();

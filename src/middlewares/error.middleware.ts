@@ -1,16 +1,16 @@
-import { Request, Response, NextFunction } from "express";
-import { ApiError, ValidationField } from "../shared/errors/api-error.js";
-import { handleMongoError } from "../shared/error-handlers/mongo.error.js";
-import { handleZodError } from "../shared/error-handlers/zod.error.js";
-import { handleJwtError } from "../shared/error-handlers/jwt.error.js";
-import { handleUnknownError } from "../shared/error-handlers/unknown.error.js";
-import { translate } from "../shared/utils/translate.js";
+import { Request, Response, NextFunction } from 'express';
+import { ApiError, ValidationField } from '../shared/errors/api-error.js';
+import { handleMongoError } from '../shared/error-handlers/mongo.error.js';
+import { handleZodError } from '../shared/error-handlers/zod.error.js';
+import { handleJwtError } from '../shared/error-handlers/jwt.error.js';
+import { handleUnknownError } from '../shared/error-handlers/unknown.error.js';
+import { translate } from '../shared/utils/translate.js';
 
 export const globalErrorHandler = (
   err: unknown,
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   const error: ApiError =
     handleMongoError(err) ??
@@ -18,7 +18,7 @@ export const globalErrorHandler = (
     handleJwtError(err) ??
     (err instanceof ApiError ? err : handleUnknownError());
 
-  const isDev = process.env.NODE_ENV === "development";
+  const isDev = process.env.NODE_ENV === 'development';
 
   // Translate the main message
   const message = translate(error.code, {

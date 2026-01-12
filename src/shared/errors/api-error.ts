@@ -16,10 +16,10 @@ export class ApiError<
   T extends { code: string; statusCode: number } = {
     code: string;
     statusCode: number;
-  }
+  },
 > extends Error {
   public statusCode: number; // HTTP status code
-  public status: "fail" | "error"; // Client error or server error
+  public status: 'fail' | 'error'; // Client error or server error
   public code: string; // Application-specific error code
   public meta?: ValidationMeta; // Optional extra error data
 
@@ -28,7 +28,7 @@ export class ApiError<
     this.code = error.code;
     this.statusCode = error.statusCode;
     this.status =
-      error.statusCode >= 400 && error.statusCode < 500 ? "fail" : "error";
+      error.statusCode >= 400 && error.statusCode < 500 ? 'fail' : 'error';
     this.meta = meta;
 
     // Fix prototype chain when extending Error
