@@ -16,6 +16,10 @@ This template focuses on **clean architecture, separation of concerns, and maint
 - **Zod** – schema-based validation
 - **JWT** – ready for authentication
 - **i18n (i18next)** – English & Arabic
+- **ESLint** – code linting
+- **Prettier** – code formatting
+- **lint-staged & Husky** – pre-commit hooks
+- **pnpm** – package manager
 - **Conventional Commits**
 
 ---
@@ -86,7 +90,7 @@ src/
 
 ---
 
-## Implemented Features
+## Features
 
 ### Modular Architecture
 
@@ -111,7 +115,7 @@ src/
   - Zod validation errors
   - JWT errors
   - Unknown errors
-- Consistent and predictable error response format
+- Consistent error response format
 
 ### Internationalization (i18n)
 
@@ -138,26 +142,30 @@ src/
 
 ---
 
-## Upcoming Modules
+## Tools & Config
 
-- **Auth Module**
-  - Register / Login
-  - JWT Access & Refresh Tokens
-  - Role-based authorization (RBAC)
+### ESLint
 
----
+- Configured for TypeScript, Node.js, and Express
+- Includes recommended rules and Prettier integration
+- Custom rules for unused vars and `_`/`next` pattern
 
-## Development Guidelines
+### Prettier
 
-- DTOs live inside each module under `dtos/`
-- Separate DTOs for:
-  - body
-  - params
-  - query
-- Controllers must not access models directly
-- Business logic lives in services
-- Errors must be thrown using `ApiError`
-- All responses and errors must be translatable
+- Enforces consistent formatting
+- Works with ESLint via `eslint-config-prettier`
+
+### Husky & lint-staged
+
+- Pre-commit hooks to run:
+  - `eslint --fix`
+  - `prettier --write`
+- Ensures clean code before commits
+
+### Line Endings
+
+- `.gitattributes` ensures LF endings cross-platform
+- Avoids `CRLF` vs `LF` warnings
 
 ---
 
@@ -166,23 +174,33 @@ src/
 ### 1. Install dependencies
 
 ```bash
-npm install
+pnpm install
 ```
 
 ### 2. Run development server
 
 ```bash
-npm run start:dev
+pnpm dev
 ```
 
 ### 3. Run in production
 
 ```bash
-npm run build
-npm run start:prod
+npm build
+npm start
 ```
 
-### 4. API Base URL
+### 4. Lint & format
+
+```bash
+pnpm run lint
+pnpm run format
+
+- This also works with any commit thanks to lint-staged + Husky pre-commit hooks.
+
+```
+
+### 5. API Base URL
 
 ```
 http://localhost:<PORT>/api/v1
@@ -209,8 +227,9 @@ This project is open-source and free to use as a **starter template for scalable
 
 ### Note
 
-The template is production-ready and can be used as:
+This template is production-ready and can be used as:
 
 - A starting point for a company project
 - An open-source boilerplate
 - Reference architecture for Node.js Express + TypeScript APIs
+- ESLint, Prettier, lint-staged, Husky, and .gitattributes are already configured for clean and consistent code
