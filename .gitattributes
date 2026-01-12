@@ -1,0 +1,35 @@
+# General text files
+* text=auto
+
+# TypeScript & JavaScript
+*.ts text eol=lf
+*.tsx text eol=lf
+*.js text eol=lf
+*.jsx text eol=lf
+*.d.ts text eol=lf
+
+# JSON, Markdown, YAML
+*.json text eol=lf
+*.md text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+
+# Config files
+*.env text eol=lf
+*.eslint* text eol=lf
+*.prettier* text eol=lf
+*.gitignore text eol=lf
+*.gitattributes text eol=lf
+tsconfig*.json text eol=lf
+pnpm-lock.yaml text eol=lf
+
+# Ignore binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary
