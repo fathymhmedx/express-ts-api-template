@@ -7,7 +7,20 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development tsx watch ./server.ts --watch ./src",
     "build": "rimraf dist && tsc",
-    "start": "cross-env NODE_ENV=production node ./dist/server.js"
+    "start": "cross-env NODE_ENV=production node ./dist/server.js",
+    "lint": "eslint . --ext .ts,.js",
+    "format": "prettier --write .",
+    "prepare": "husky install",
+    "test": "echo \"No tests yet\""
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md}": [
+      "prettier --write"
+    ]
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
@@ -21,6 +34,10 @@
     "@types/morgan": "^1.9.10",
     "@types/node": "^24.10.1",
     "cross-env": "^10.1.0",
+    "eslint": "^9.39.2",
+    "husky": "^8.0.0",
+    "lint-staged": "^16.2.7",
+    "prettier": "^3.7.4",
     "rimraf": "^6.1.2",
     "tsx": "^4.20.6",
     "typescript": "^5.9.3"
