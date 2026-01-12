@@ -10,8 +10,7 @@
     "start": "cross-env NODE_ENV=production node ./dist/server.js",
     "lint": "eslint . --ext .ts,.js",
     "format": "prettier --write .",
-    "prepare": "husky install",
-    "test": "echo \"No tests yet\""
+    "prepare": "husky install"
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx}": [
