@@ -213,4 +213,4 @@ The template is production-ready and can be used as:
 
 - A starting point for a company project
 - An open-source boilerplate
-- Reference architecture for Node.js + TypeScript APIs
+- Reference architecture for Node.js Express + TypeScript APIs
