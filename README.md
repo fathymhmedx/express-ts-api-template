@@ -186,8 +186,8 @@ pnpm dev
 ### 3. Run in production
 
 ```bash
-npm build
-npm start
+pnpm build
+pnpm start
 ```
 
 ### 4. Lint & format
