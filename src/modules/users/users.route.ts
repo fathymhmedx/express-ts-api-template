@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import usersController from '../../containers/users.container.js';
+import { usersController } from '../../shared/containers/users.container.js';
 import { validate } from '../../middlewares/validate.middleware.js';
 import {
   createUserSchema,

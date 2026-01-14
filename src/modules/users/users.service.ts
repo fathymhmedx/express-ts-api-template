@@ -1,40 +1,44 @@
-import { UsersRepository } from './users.repository.js';
-import { User } from './users.model.js';
-import { CreateUserDto, UpdateUserDto } from './dtos/index.js';
+import { inject, injectable } from 'tsyringe';
+import { UsersRepository } from './contracts/users.repository.js';
+import { TOKENS } from '../../shared/containers/tokens.js';
 import { ApiError } from '../../shared/errors/api-error.js';
 import { USER_ERRORS } from './users.codes.js';
-export class UsersService {
-  constructor(private userRepository: UsersRepository) {}
+import { CreateUserDto, UpdateUserDto } from './dtos/index.js';
 
-  async createUser(userData: CreateUserDto): Promise<User> {
-    return this.userRepository.create(userData);
+@injectable()
+export class UsersService {
+  constructor(
+    @inject(TOKENS.UsersRepository)
+    private readonly userRepository: UsersRepository,
+  ) {}
+
+  async createUser(data: CreateUserDto) {
+    return this.userRepository.create(data);
   }
 
-  async getAllUsers(): Promise<User[]> {
+  async getAllUsers() {
     return this.userRepository.findAll();
   }
 
-  async getUserById(userId: string): Promise<User> {
-    const user = await this.userRepository.findOne(userId);
-    if (!user) throw new ApiError(USER_ERRORS.USER_NOT_FOUND, { userId });
+  async getUserById(id: string) {
+    const user = await this.userRepository.findById(id);
+    if (!user) throw new ApiError(USER_ERRORS.USER_NOT_FOUND, { id });
     return user;
   }
 
-  async updateUser(userId: string, updateData: UpdateUserDto): Promise<User> {
-    const updatedUser = await this.userRepository.update(userId, updateData);
-    if (!updatedUser)
-      throw new ApiError(USER_ERRORS.USER_NOT_FOUND, { userId });
+  async updateUser(id: string, data: UpdateUserDto) {
+    const updatedUser = await this.userRepository.update(id, data);
+    if (!updatedUser) throw new ApiError(USER_ERRORS.USER_NOT_FOUND, { id });
     return updatedUser;
   }
 
-  async deleteUser(userId: string): Promise<User> {
-    const deletedUser = await this.userRepository.remove(userId);
-    if (!deletedUser)
-      throw new ApiError(USER_ERRORS.USER_NOT_FOUND, { userId });
+  async deleteUser(id: string) {
+    const deletedUser = await this.userRepository.delete(id);
+    if (!deletedUser) throw new ApiError(USER_ERRORS.USER_NOT_FOUND, { id });
     return deletedUser;
   }
 
-  async getUserByEmail(email: string): Promise<User> {
+  async getUserByEmail(email: string) {
     const user = await this.userRepository.findByEmail(email);
     if (!user) throw new ApiError(USER_ERRORS.USER_NOT_FOUND, { email });
     return user;
