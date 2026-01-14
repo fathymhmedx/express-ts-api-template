@@ -1,210 +1,199 @@
-# Node.js Express TypeScript API Template
+# Express TypeScript API Template
 
-A **clean, scalable, and production-ready Node.js REST API template** built with **Express** and **TypeScript**.  
-Designed using a **feature-based (modular) architecture** with strong validation, centralized error handling, domain-based codes, and full **i18n support (EN / AR)**.
-
-This template focuses on **clean architecture, separation of concerns, and maintainability**, making it suitable for real-world backend applications.
+A **clean, scalable, and production-ready Node.js REST API template** built with **Express** and **TypeScript**, designed to be **database-agnostic** and easy to extend.
+Supports modular architecture, strong validation, DI with `tsyringe`, i18n, and ready for real-world applications.
 
 ---
 
-## Tech Stack
+## Table of Contents
 
-- **Node.js**
-- **Express.js**
-- **TypeScript**
-- **MongoDB + Mongoose**
-- **Zod** – schema-based validation
-- **JWT** – ready for authentication
-- **i18n (i18next)** – English & Arabic
-- **ESLint** – code linting
-- **Prettier** – code formatting
-- **lint-staged & Husky** – pre-commit hooks
-- **pnpm** – package manager
-- **Conventional Commits**
-
----
-
-## Project Structure
-
-```
-src/
-├── app.ts                  # Express app configuration
-├── server.ts               # Server bootstrap
-│
-├── containers/             # Manual dependency injection
-│   └── users.container.ts
-│
-├── locales/                # Localization files
-│   ├── ar/
-│   │   └── translation.json
-│   └── en/
-│       └── translation.json
-│
-├── middlewares/            # Global middlewares
-│   ├── error.middleware.ts
-│   ├── not-found.middleware.ts
-│   └── validate.middleware.ts
-│
-├── modules/                # Feature-based application modules
-│   └── users/
-│       ├── dtos/           # Zod DTO schemas
-│       │   ├── create-user.dto.ts
-│       │   ├── update-user.dto.ts
-│       │   ├── user-id-param.dto.ts
-│       │   ├── user-email-param.dto.ts
-│       │   └── index.ts
-│       ├── users.codes.ts  # Domain-specific success & error codes
-│       ├── users.controller.ts
-│       ├── users.model.ts
-│       ├── users.repository.ts
-│       ├── users.route.ts
-│       └── users.service.ts
-│
-├── routes/                 # Central route registration
-│   └── index.ts
-│
-├── shared/                 # Shared & reusable logic
-│   ├── config/
-│   │   └── database.ts
-│   ├── constants/
-│   │   └── user-roles.ts
-│   ├── error-handlers/
-│   │   ├── jwt.error.ts
-│   │   ├── mongo.error.ts
-│   │   ├── unknown.error.ts
-│   │   └── zod.error.ts
-│   ├── errors/
-│   │   ├── api-error.ts    # Generic ApiError with structured metadata
-│   │   └── error-codes.ts  # Global error codes
-│   ├── i18n/
-│   │   └── index.ts
-│   ├── repositories/
-│   │   └── base.repository.ts
-│   └── utils/
-│       ├── asyncHandler.ts
-│       └── translate.ts
-│
-└── types/
-    └── express.d.ts        # Express type augmentation
-```
+1. [Features](#features)
+2. [Architecture Overview](#architecture-overview)
+3. [Folder Structure](#folder-structure)
+4. [Database-Agnostic Repositories](#database-agnostic-repositories)
+5. [Dependency Injection (tsyringe)](#dependency-injection-tsyringe)
+6. [Switching Databases](#switching-databases)
+7. [Usage](#usage)
+8. [Line Endings](#line-endings)
+9. [Git Conventions](#git-conventions)
+10. [Contributing](#contributing)
+11. [License](#license)
+12. [Note](#note)
+13. [Contact](#contact)
 
 ---
 
 ## Features
 
-### Modular Architecture
-
-- Feature-based modules (`users`, `auth`, etc.)
-- Clear separation: **Controller → Service → Repository**
-- Controllers never access models directly
-
-### Validation
-
-- Zod schemas for:
-  - Request body
-  - Route params (`id`, `email`, etc.)
-  - Query params
-- Generic validation middleware
-- Structured field-level validation errors
-
-### Centralized Error Handling
-
-- Unified `ApiError` abstraction
-- Automatic handling for:
-  - MongoDB errors
-  - Zod validation errors
-  - JWT errors
-  - Unknown errors
-- Consistent error response format
-
-### Internationalization (i18n)
-
-- English & Arabic support
-- All user-facing messages go through i18n
-- Field-level validation messages are translated automatically
-
-### Users Module
-
-- Full CRUD operations
-- Request params validation (`id`, `email`)
-- Domain-specific success & error codes
-- Clean, translated API responses
-
-### Base Repository
-
-- Generic reusable Mongoose repository
-- Reduces duplication across modules
-
-### Dependency Injection
-
-- Manual DI via containers
-- Easy to test, extend, and refactor
+- Node.js + Express + TypeScript
+- Database-agnostic architecture (MongoDB, Prisma, Sequelize)
+- Clean architecture (Domain / Infrastructure / Application / Controller)
+- Strong validation using **Zod**
+- JWT-ready authentication
+- i18n support (English / Arabic)
+- ESLint + Prettier + lint-staged + Husky
+- DI with `tsyringe` for clean dependency injection
+- Modular, feature-based structure
+- Ready for production
 
 ---
 
-## Tools & Config
+## Architecture Overview
 
-### ESLint
+```
+src/
+├── modules/
+│   └── users/
+│       ├── contracts/            # DB-agnostic repository interfaces
+│       │   └── users.repository.ts
+│       ├── dtos/                 # DTOs for requests
+│       ├── users.model.ts
+│       ├── users.service.ts
+│       ├── users.controller.ts
+│       └── users.routes.ts
+│
+├── infrastructure/
+│   └── database/
+│       ├── mongo/                # MongoDB implementation
+│       │   ├── base.repository.ts
+│       │   └── users.repository.ts
+│       ├── prisma/               # Prisma implementation (optional)
+│       │   ├── base.repository.ts
+│       │   └── users.repository.ts
+│
+├── shared/
+│   ├── container/                # tsyringe DI setup
+│   │   ├── index.ts              # entry for reflect-metadata & register
+│   │   └── register.ts           # DI bindings
+│   ├── contracts/                # BaseRepository, other interfaces
+│   ├── errors/                   # APIError, error codes
+│   └── utils/                    # Helper functions
+│
+├── middlewares/
+└── app.ts
+```
 
-- Configured for TypeScript, Node.js, and Express
-- Includes recommended rules and Prettier integration
-- Custom rules for unused vars and `_`/`next` pattern
+---
 
-### Prettier
+## Database-Agnostic Repositories
 
-- Enforces consistent formatting
-- Works with ESLint via `eslint-config-prettier`
+1. **Contracts (Domain-level, DB-agnostic)**
 
-### Husky & lint-staged
+```ts
+// modules/users/contracts/users.repository.ts
+import { BaseRepository } from '../../../shared/contracts/base.repository';
+import { User } from '../users.model';
 
-- Pre-commit hooks to run:
-  - `eslint --fix`
-  - `prettier --write`
-- Ensures clean code before commits
+export interface UsersRepository extends BaseRepository<User> {
+  findByEmail(email: string): Promise<User | null>;
+}
+```
 
-### Line Endings
+2. **Infrastructure (DB-specific implementation)**
+
+- **MongoDB:**
+
+```
+infrastructure/database/mongo/base.repository.ts
+infrastructure/database/mongo/users.repository.ts
+```
+
+- **Prisma (optional):**
+
+```
+infrastructure/database/prisma/base.repository.ts
+infrastructure/database/prisma/users.repository.ts
+```
+
+3. **Service Layer (Application)**
+
+```ts
+import { inject, injectable } from 'tsyringe';
+import { UsersRepository } from './contracts/users.repository';
+import { TOKENS } from '../../shared/container/tokens';
+
+@injectable()
+export class UsersService {
+  constructor(
+    @inject(TOKENS.UsersRepository)
+    private readonly usersRepository: UsersRepository,
+  ) {}
+}
+```
+
+4. **Controller Layer**
+
+- Resolves service via DI
+- Handles HTTP requests and responses only
+
+---
+
+## Dependency Injection (tsyringe)
+
+- `shared/container/tokens.ts` → defines symbols for DI
+- `shared/container/register.ts` → registers implementations
+
+```ts
+import { container } from 'tsyringe';
+import { UsersRepository } from '../../infrastructure/database/mongo/users.repository';
+import { UsersService } from '../../modules/users/users.service';
+import { TOKENS } from './tokens';
+
+container.registerSingleton(TOKENS.UsersRepository, UsersRepository);
+container.registerSingleton(TOKENS.UsersService, UsersService);
+```
+
+---
+
+## Switching Databases
+
+- Only change **implementation in `infrastructure/database/<db>`**
+- Update DI registration in `register.ts`
+- No change required in **Services, Controllers, or Routes**
+
+Example:
+
+```ts
+// Mongo
+container.registerSingleton(TOKENS.UsersRepository, MongoUsersRepository);
+
+// Prisma
+container.registerSingleton(TOKENS.UsersRepository, PrismaUsersRepository);
+```
+
+---
+
+## Usage
+
+1. Clone the repo
+2. Set your `.env` file
+3. Choose database implementation in `register.ts`
+4. Run:
+
+```bash
+pnpm install
+pnpm dev
+```
+
+5. Access endpoints via `/api/v1/users`
+
+---
+
+## Line Endings
 
 - `.gitattributes` ensures LF endings cross-platform
 - Avoids `CRLF` vs `LF` warnings
 
 ---
 
-## Getting Started
-
-### 1. Install dependencies
+## Linting & Formatting
 
 ```bash
-pnpm install
+pnpm run lint   # Check linting
+pnpm run format # Auto-format code
 ```
 
-### 2. Run development server
-
-```bash
-pnpm dev
-```
-
-### 3. Run in production
-
-```bash
-pnpm build
-pnpm start
-```
-
-### 4. Lint & format
-
-```bash
-pnpm run lint
-pnpm run format
-
-- This also works with any commit thanks to lint-staged + Husky pre-commit hooks.
-
-```
-
-### 5. API Base URL
-
-```
-http://localhost:<PORT>/api/v1
-```
+- Works automatically with any commit thanks to **lint-staged** + **Husky pre-commit hooks**
 
 ---
 
@@ -219,9 +208,19 @@ This project follows **Conventional Commits**:
 
 ---
 
+## Contributing
+
+- Follow clean architecture
+- Add new modules under `modules/`
+- Create contract interfaces first
+- Implement DB-specific repository in `infrastructure/database/<db>/`
+- Register DI bindings in `shared/container/register.ts`
+
+---
+
 ## License
 
-This project is open-source and free to use as a **starter template for scalable Node.js APIs**.
+MIT
 
 ---
 
@@ -233,3 +232,13 @@ This template is production-ready and can be used as:
 - An open-source boilerplate
 - Reference architecture for Node.js Express + TypeScript APIs
 - ESLint, Prettier, lint-staged, Husky, and .gitattributes are already configured for clean and consistent code
+
+---
+
+### Contact
+
+For questions or support, reach out:
+
+- **Author:** Fathy Mohamed
+- **Email:** [fathymhmed11@gmail.com](mailto:fathymhmed11@gmail.com)
+- **GitHub:** [https://github.com/fathymhmedx](https://github.com/fathymhmedx)
