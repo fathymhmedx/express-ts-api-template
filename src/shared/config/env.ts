@@ -28,14 +28,6 @@ const envSchema = z.object({
       },
     ),
   DB_PASS: z.string({ message: 'DB_PASS is required' }),
-  JWT_SECRET_KEY: z.string({ message: 'JWT_SECRET_KEY is required' }).min(10),
-  JWT_EXPIRES_IN: z.string({ message: 'JWT_EXPIRES_IN is required' }),
-  JWT_REFRESH_SECRET_KEY: z
-    .string({ message: 'JWT_REFRESH_SECRET_KEY is required' })
-    .min(10),
-  JWT_REFRESH_EXPIRES_IN: z.string({
-    message: 'JWT_REFRESH_EXPIRES_IN is required',
-  }),
   CLIENT_URL: z.string().optional(),
 });
 
